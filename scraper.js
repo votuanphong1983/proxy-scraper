@@ -116,15 +116,16 @@ function scrapper(db, site, type) {
 }
 
 function run(db) {
-	var scrappers = [];
-	scrappers.push(scrapper(db, "http://free-proxy-list.net/", "free"));
+	var scrappers = [];	
+	scrappers.push(scrapper(db, "https://free-proxy-list.net/", "free"));
+	scrappers.push(scrapper(db, "https://free-proxy-list.net/uk-proxy.html", "uk"));	
+	scrappers.push(scrapper(db, "https://free-proxy-list.net/anonymous-proxy.html", "free"));
+	scrappers.push(scrapper(db, "http://www.google-proxy.net/", "anonymous"));		
 	//skipped web proxies
-	scrappers.push(scrapper(db, "http://sslproxies.org/", "ssl"));
-	scrappers.push(scrapper(db, "http://us-proxy.org/", "us"));
-	scrappers.push(scrapper(db, "http://free-proxy-list.net/uk-proxy.html", "uk"));
-	//skipped socks4/socks5
-	scrappers.push(scrapper(db, "http://google-proxy.net/", "google"));
-	scrappers.push(scrapper(db, "http://free-proxy-list.net/anonymous-proxy.html", "anonymous"));
+	scrappers.push(scrapper(db, "https://www.sslproxies.org/", "ssl"));
+	scrappers.push(scrapper(db, "https://us-proxy.org/", "us"));	
+	//skipped socks4/socks5	
+	scrappers.push(scrapper(db, "https://www.socks-proxy.net/", "google"));		
 
 	Promise.all(scrappers).then(function() {
 		cleanUp(db).then(function() {
@@ -135,3 +136,4 @@ function run(db) {
 }
 
 initDatabase(run);
+
